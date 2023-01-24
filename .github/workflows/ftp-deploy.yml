@@ -25,5 +25,5 @@ jobs:
         protocol: ftp
         username: ${{ secrets.ftp_username }}
         password: ${{ secrets.ftp_password }}
-        server-dir: node/app01
+        server-dir: node/app01/
         local-dir: ./
