@@ -1,12 +1,15 @@
-const express = require('express')
-const router = express.Router()
-const app = express()
-const port = 3000
+const config =  require('./config.js');
+const express =  require('express');
+const app =  express();
+let root = config.ROOT;
 
-app.get('/', (req, res) => {
-  res.send('Hello World!')
-})
+console.log(`NODE_ENV=${config.NODE_ENV}`);
 
-app.listen(port, () => {
-  console.log(`Example app listening on port ${port}`)
+app.get(`${root}/test`, (req, res) => {
+    res.send('Hello World !! ' + root);
+});
+
+app.listen(config.PORT, config.HOST, () => {
+    console.log(`APP LISTENING ON http://${config.HOST}:${config.PORT}`);
+    console.log(config.ROOT);
 })

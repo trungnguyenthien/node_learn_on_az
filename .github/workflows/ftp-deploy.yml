@@ -27,3 +27,8 @@ jobs:
         password: ${{ secrets.ftp_password }}
         server-dir: node/app01/
         local-dir: ./
+        exclude: |
+          **/.git*
+          **/.git*/**
+          **/node_modules/**
+          fileToExclude.txt
