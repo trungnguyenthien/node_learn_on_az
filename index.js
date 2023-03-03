@@ -1,9 +1,10 @@
-const config =  require('./src/config/env-vars');
+const config =  require('./src/config/env-vars'); // Đọc biến môi trường từ .env.prodution và .env.development
 const corsOptions = require('./src/config/cors-options');
 const express =  require('express');
 const cors = require('cors');
 const bodyParser = require("body-parser");
 const morgan = require('morgan');
+const crypto = require('crypto');
 
 const app =  express();
 app.use(cors(corsOptions));
