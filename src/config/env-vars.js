@@ -6,11 +6,12 @@ dotenv.config({
     path: profilePath
 });
 
+console.log('__dirname = ' + __dirname);
 console.log('ENV_PROFILE = ' + profilePath);
 
 module.exports = {
     NODE_ENV: process.env.NODE_ENV || 'failed_dev',
-    HOST: process.env.HOST || 'localhost',
+    HOST: process.env.HOST || 'localhost2',
     PORT: process.env.PORT || 3000,
     ROOT: process.env.ROOT || ''
 }

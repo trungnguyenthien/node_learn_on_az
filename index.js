@@ -1,6 +1,12 @@
-const config =  require('./config.js');
+const config =  require('./src/config/env-vars');
+const corsOptions = require('./src/config/cors-options');
 const express =  require('express');
+const cors = require('cors');
+const bodyParser = require("body-parser");
+
 const app =  express();
+app.use(cors(corsOptions));
+app.use(bodyParser.json());
 let root = config.ROOT;
 
 console.log(`NODE_ENV=${config.NODE_ENV}`);
