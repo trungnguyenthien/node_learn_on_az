@@ -3,10 +3,12 @@ const corsOptions = require('./src/config/cors-options');
 const express =  require('express');
 const cors = require('cors');
 const bodyParser = require("body-parser");
+const morgan = require('morgan');
 
 const app =  express();
 app.use(cors(corsOptions));
 app.use(bodyParser.json());
+app.use(morgan('combined')); // sử dụng morgan để ghi log cho tất cả các yêu cầu vào và ra
 let root = config.ROOT;
 
 console.log(`NODE_ENV=${config.NODE_ENV}`);
