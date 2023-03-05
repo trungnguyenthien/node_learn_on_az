@@ -3,28 +3,38 @@ const corsOptions = require('./src/config/cors-options');
 const express =  require('express');
 const cors = require('cors');
 const bodyParser = require("body-parser");
+const common = require('./src/utils/common');
 const morgan = require('morgan');
-const { Aes256 } = require('./src/utils/crypto-utils');
+const listEndpoints = require('express-list-endpoints');
+// CONTROLLER
+const CryptoController = require('./src/controllers/crypto-controller');
 
 const app =  express();
 app.use(cors(corsOptions));
 app.use(bodyParser.json());
 app.use(morgan('combined')); // sử dụng morgan để ghi log cho tất cả các yêu cầu vào và ra
-let root = config.ROOT;
 
-const key = "22345";
-const enc = Aes256.encrypt('Kimchon', key)
-
-console.log(`ENCRYPTED = ${enc}`);
-
-const dec = Aes256.decrypt(en, key);
-
-console.log(`DECRYPTED = ${dec}`);
+const makePath = (path) => `${config.ROOT}${path}`;
 
 console.log(`NODE_ENV=${config.NODE_ENV}`);
 
-app.get(`${root}/test`, (req, res) => {
-    res.send('Hello World !! ' + root);
+app.get(makePath('/test'), (req, res) => {
+    res.send('Hello World !! ' + config.ROOT);
+});
+
+app.get(makePath('/utils/aesEncrypt'), (req, res) =>  CryptoController.encrypt(req, res) );
+app.get(makePath('/utils/aesDecrypt'), (req, res) =>  CryptoController.decrypt(req, res) );
+
+const startTime = new Date();
+app.get(makePath('/info'), (req, res) =>  {
+    const endpoints = listEndpoints(app).map((point) => {
+        return `${point.methods[0]}:${point.path}`;
+    }).sort();
+    res.status(200).json({ success: true, data: {
+        start: common.date2String(startTime),
+        host: `${config.HOST}:${config.PORT}`,
+        endpoints: endpoints
+    } });
 });
 
 app.listen(config.PORT, config.HOST, () => {

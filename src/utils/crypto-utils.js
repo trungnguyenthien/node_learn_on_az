@@ -5,7 +5,7 @@ const algorithm = 'aes-256-cbc';
 
 function createKeyIV(keyOrigin) {
     const size = 32;
-    const key = Buffer.alloc(maxKeySize, '\0');
+    const key = Buffer.alloc(size, '\0');
     keyOrigin = Buffer.from(keyOrigin, 'utf8');
     keyOrigin.copy(key);
     return {
@@ -15,20 +15,17 @@ function createKeyIV(keyOrigin) {
 }
 
 class Aes256 {
-
-
-
-    static encrypt(plainText, keyOrigin) {
+    static encrypt(plainText, keyOrigin, format = 'base64') {
         const keyiv = createKeyIV(keyOrigin);
         const cipher = crypto.createCipheriv(algorithm, keyiv.key, keyiv.iv);
-        let encryptedText = cipher.update(plainText, 'utf8', 'base64');
-        encryptedText += cipher.final('base64');
+        let encryptedText = cipher.update(plainText, 'utf8', format);
+        encryptedText += cipher.final(format);
         return encryptedText;
     }
 
-    static decrypt(encryptedText, keyOrigin) {
+    static decrypt(encryptedText, keyOrigin, format = 'base64') {
         const keyiv = createKeyIV(keyOrigin);
-        const encrypted = Buffer.from(encryptedText, 'base64');
+        const encrypted = Buffer.from(encryptedText, format);
         const decipher = crypto.createDecipheriv(algorithm, keyiv.key, keyiv.iv);
         let decryptedText = decipher.update(encrypted, '', 'utf8');
         decryptedText += decipher.final('utf8');
