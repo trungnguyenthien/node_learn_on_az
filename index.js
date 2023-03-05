@@ -12,11 +12,12 @@ app.use(bodyParser.json());
 app.use(morgan('combined')); // sử dụng morgan để ghi log cho tất cả các yêu cầu vào và ra
 let root = config.ROOT;
 
-const enc = Aes256.encrypt('Kimchon')
+const key = "22345";
+const enc = Aes256.encrypt('Kimchon', key)
 
 console.log(`ENCRYPTED = ${enc}`);
 
-const dec = Aes256.decrypt(enc);
+const dec = Aes256.decrypt(en, key);
 
 console.log(`DECRYPTED = ${dec}`);
 
