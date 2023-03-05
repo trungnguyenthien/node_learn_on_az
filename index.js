@@ -4,13 +4,21 @@ const express =  require('express');
 const cors = require('cors');
 const bodyParser = require("body-parser");
 const morgan = require('morgan');
-const crypto = require('crypto');
+const { Aes256 } = require('./src/utils/crypto-utils');
 
 const app =  express();
 app.use(cors(corsOptions));
 app.use(bodyParser.json());
 app.use(morgan('combined')); // sử dụng morgan để ghi log cho tất cả các yêu cầu vào và ra
 let root = config.ROOT;
+
+const enc = Aes256.encrypt('Kimchon')
+
+console.log(`ENCRYPTED = ${enc}`);
+
+const dec = Aes256.decrypt(enc);
+
+console.log(`DECRYPTED = ${dec}`);
 
 console.log(`NODE_ENV=${config.NODE_ENV}`);
 
