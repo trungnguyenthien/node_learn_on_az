@@ -13,5 +13,7 @@ module.exports = {
     NODE_ENV: process.env.NODE_ENV || 'failed_dev',
     HOST: process.env.HOST || 'localhost2',
     PORT: process.env.PORT || 3000,
-    ROOT: process.env.ROOT || ''
+    ROOT: process.env.ROOT || '',
+    VERIFY_TOKEN:  process.env.VERIFY_TOKEN || '1',
+    SALT: process.env.SALT || '',
 }
