@@ -6,29 +6,32 @@ const verifyUserToken = (req, res, next) => {
 
     console.log("verifyUserToken");
     if (config.VERIFY_TOKEN == '0') {
-        return next();
+        next();
+        return res.end();
     }
 
 
     // Get token from header
     const token = req.header('Authorization');
+    // Verify token
+    const checkToken = common.genToken();
     console.log(`Token ${token}`);
     // Check if not token
     if (!token) {
-        return res.status(401).send({
-            msg: 'No token in Authorization header'
+        res.status(401).send({
+            error: `No token in [Authorization] header`
         });
+        return res.end();
     }
 
-    // Verify token
-    const checkToken = common.genToken();
-
     if (checkToken !== token) {
-        return res.status(401).json({
-            msg: 'Token is not valid'
+        res.status(401).json({
+            error: 'Token is not valid'
         });
+        return res.end();
     } else {
-        return next();
+        next();
+        return res.end();
     }
 
 };
