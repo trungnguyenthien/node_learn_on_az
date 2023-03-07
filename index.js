@@ -33,8 +33,9 @@ if (config.NODE_ENV === 'development') {
 }
 
 // FOR DEV + PROD
+
 // NEED VERITY TOKEN
-app.post(makePath('/parseContents'), verifyUserToken, (req, res) => GetContentController.parseContents(req, res));
+app.get(makePath('/parseContents'), verifyUserToken, (req, res) => GetContentController.parseContents(req, res));
 
 // DONT NEED TOKEN
 app.post(makePath('/utils/aesEncrypt'), (req, res) => CryptoController.encrypt(req, res));
