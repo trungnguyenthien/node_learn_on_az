@@ -35,7 +35,8 @@ if (config.NODE_ENV === 'development') {
 // FOR DEV + PROD
 
 // NEED VERITY TOKEN
-app.get(makePath('/parseContents'), verifyUserToken, (req, res) => GetContentController.parseContents(req, res));
+app.get(makePath('/xcontent'), verifyUserToken, (req, res) => GetContentController.parseContents(req, res));
+
 
 // DONT NEED TOKEN
 app.post(makePath('/utils/aesEncrypt'), (req, res) => CryptoController.encrypt(req, res));
@@ -60,3 +61,10 @@ app.listen(config.PORT, config.HOST, () => {
     console.log(`APP LISTENING ON http://${config.HOST}:${config.PORT}`);
     console.log(config.ROOT);
 })
+
+
+const axios = require("axios");
+const testURL = "http://localhost:3000/xcontent?url=https://tuoitre.vn/hinh-anh-tho-nhi-ky-syria-truoc-va-sau-dong-dat-kep-20230208141729257.htm"
+console.log("Thuc hien request");
+axios.get(testURL); // Thực hiện request đến URL mong muốn
+console.log("Request thành công");

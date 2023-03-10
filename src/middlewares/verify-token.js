@@ -10,7 +10,6 @@ const verifyUserToken = (req, res, next) => {
         return res.end();
     }
 
-
     // Get token from header
     const token = req.header('Authorization');
     // Verify token
@@ -33,7 +32,6 @@ const verifyUserToken = (req, res, next) => {
         next();
         return res.end();
     }
-
 };
 
 module.exports = verifyUserToken;
