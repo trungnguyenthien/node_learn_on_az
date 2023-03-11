@@ -54,7 +54,7 @@ const parse = async (url) => {
         })
         chapNum += 1
         myURL = nextLink
-        await sleep(200)
+        await sleep(100)
     }
 
     return output
