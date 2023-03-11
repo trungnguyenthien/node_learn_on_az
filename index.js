@@ -9,7 +9,7 @@ const morgan = require('morgan');
 const listEndpoints = require('express-list-endpoints');
 // CONTROLLER
 const CryptoController = require('./src/controllers/crypto');
-const GetContentController = require('./src/controllers/get-content');
+const GetContentController = require('./src/controllers/xcontent');
 
 const app = express();
 app.use(cors(corsOptions));

@@ -1,17 +1,6 @@
-const BaseContentParser = require('./content-parser')
-const {parse} = require('node-html-parser');
+const BaseArticleParser = require('./base-article-parser')
 
-class TuoiTreContentParser extends BaseContentParser {
-    setUrl(url) {
-        this.url = url;
-    }
-
-    setHtml(html) {
-        this.html = html;
-        // console.log(html);
-        this.document = parse(html)
-    }
-
+class TuoiTreContentParser extends BaseArticleParser {
     isMySite(url) {
         return url.startsWith(`https://tuoitre.vn/`)
     }
@@ -23,22 +12,30 @@ class TuoiTreContentParser extends BaseContentParser {
 
     // Return Title của content. NULL nếu không parse được title.
     parseTitle() {
-        return null;
+        return this.rootQuery('.detail-title').text;
     }
 
     // Return html Content
     parseContent() {
-        // console.log(this.document)
-        let main = this.document.querySelector('.detail-content');
-        const adDivs = main.querySelectorAll('div.VCSortableInPreviewMode[type=RelatedOneNews]')
-        // console.log(adDiv)
-        for(let adDiv of adDivs) {
-            adDiv.parentNode.removeChild(adDiv)
-            adDiv.remove()
-          }
-
-        // main.removeChild(main.querySelector('.VCSortableInPreviewMode'))
+        let main = this.rootQuery('.detail-content');
+        this.removeAds(main, 'div.VCSortableInPreviewMode[type=RelatedOneNews]')
         return main.toString()
+    }
+
+    parseCreatedDate() {
+        return null;
+    }
+
+    parseSummary() {
+        return null;
+    }
+
+    parseListArticleImages() {
+        return [];
+    }
+
+    isFirstArticle() {
+        return true;
     }
 }
 
