@@ -7,7 +7,7 @@ const verifyUserToken = (req, res, next) => {
     console.log("verifyUserToken");
     if (config.VERIFY_TOKEN == '0') {
         next();
-        return res.end();
+        return //res.end();
     }
 
     // Get token from header
@@ -20,17 +20,17 @@ const verifyUserToken = (req, res, next) => {
         res.status(401).send({
             error: `No token in [Authorization] header`
         });
-        return res.end();
+        return //res.end();
     }
 
     if (checkToken !== token) {
         res.status(401).json({
             error: 'Token is not valid'
         });
-        return res.end();
+        return //res.end();
     } else {
         next();
-        return res.end();
+        return //res.end();
     }
 };
 

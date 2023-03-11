@@ -1,10 +1,16 @@
 const parse = require('../services/parser')
 
 const GetContentController = {
-    parseContents: (req, res, next) => {
+    parseContents: async (req, res, next) => {
         const url = req.query.url
-        const output = parse(url)
-        res.status(200).json({ success: true, data: output });
+        const output = await parse(url)
+
+        console.log(output.map((m) => m.id))
+
+        res.status(200).json({
+            success: true,
+            data: output
+        });
     }
 }
 

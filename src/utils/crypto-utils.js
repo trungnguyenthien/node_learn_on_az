@@ -33,8 +33,15 @@ class Aes256 {
     }
 }
 
+const md5 = (str) => {
+    const hash = crypto.createHash('md5');
+    hash.update(str);
+    return hash.digest('hex');
+  }
+
 module.exports = {
-    Aes256
+    Aes256,
+    md5
 };
 
 /*

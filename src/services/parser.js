@@ -2,6 +2,10 @@ const TuoiTreParser = require('./tuoitre-parser')
 const TruyenSexTvParser = require('./truyensextv-parser')
 const { log, warn, error, success } = require('../utils/log')
 const common = require('../utils/common')
+const { md5 } = require('../utils/crypto-utils')
+function sleep(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+  }
 
 const makeAllContentParser = () => [
     new TuoiTreParser(),
@@ -23,24 +27,25 @@ const parse = async (url) => {
     let chapNum = 0;
     let myURL = url;
     while (myURL) {
-        console.log(`Process: ${myURL}`)
-        const html = await common.loadRaw(url)
+        const html = await common.loadRaw(myURL)
+        console.log("Load completed " + myURL)
         if(!html) {
-            error('Load HTML ERROR')
+            console.log('Load HTML ERROR, html = ' + html)
             return "Load HTML ERROR"
         }
-        
-        myParser.init(url, html)
+       
+        myParser.init(myURL, html)
         const content = myParser.parseContent()
         const title = myParser.parseTitle()
         const nextLink = myParser.parseNextLink()
         const summary = myParser.parseSummary()
         const images = myParser.parseImages()
 
-        console.log(nextLink)
+        console.log(content)
 
         output.push({
-            id: common.string2Hex(myURL),
+            id: md5(myURL),
+            url: myURL,
             title: title,
             summary: summary,
             images: images,
@@ -49,13 +54,10 @@ const parse = async (url) => {
         })
         chapNum += 1
         myURL = nextLink
-    } 
-
-    console.log(output.map((m) => m.id))
+        await sleep(200)
+    }
 
     return output
-
-
 }
 
 module.exports = parse

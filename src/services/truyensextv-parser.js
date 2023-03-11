@@ -4,7 +4,7 @@ const {
 } = require('../utils/common')
 
 class TruyenSexTvParser extends BaseArticleParser {
-    isMySite = (url) => url.startsWith(`https://truyensextv.com/`)
+    isMySite = (url) => url.startsWith(`https://truyensextv.me/`)
     // Return NULL: Không request next content, có thể là không lấy được link tiếp theo hoặc content này là cuối cùng.
     parseNextLink = () =>  {
         const phantrang = this.rootQuery('div.phantrang')
@@ -13,12 +13,12 @@ class TruyenSexTvParser extends BaseArticleParser {
         const lastLink = links[links.length - 1];
         if (!lastLink) return null
         const href = lastLink.getAttribute('href')
-        // const text = lastLink.text
-        // if(text !== 'Đọc tiếp') return null
+        const text = lastLink.text
+        if(text !== 'Đọc tiếp') return null
         return href
     };
     // Return Title của content. NULL nếu không parse được title.
-    parseTitle = () => this.rootQueryText('.bai-viet-box > a');
+    parseTitle = () => this.rootQuery('.bai-viet-box').querySelector('a').text;
     parseCreatedDate = () => null
     parseSummary = () =>  null;
     parseImages = () =>  null;
@@ -28,7 +28,7 @@ class TruyenSexTvParser extends BaseArticleParser {
     parseContent() {
         let main = this.rootQuery('div.ndtruyen');
         // this.removeAds(main, 'div.VCSortableInPreviewMode[type=RelatedOneNews]')
-        return main.toString()
+        return main.text
     }
 
 }

@@ -12,7 +12,7 @@ const {
 } = require('node-libcurl');
 
 axios.defaults.headers.common['User-Agent'] = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/108.0.0.0 Safari/537.36';
-axios.defaults.headers.common['Accept'] = 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8';
+// axios.defaults.headers.common['Accept'] = 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8';
 axios.defaults.headers.common['Connection'] = 'keep-alive';
 axios.defaults.withCredentials = true;
 axios.defaults.maxRedirects = 10;

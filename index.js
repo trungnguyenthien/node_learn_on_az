@@ -35,7 +35,7 @@ if (config.NODE_ENV === 'development') {
 // FOR DEV + PROD
 
 // NEED VERITY TOKEN
-app.get(makePath('/xcontent'), verifyUserToken, (req, res) => GetContentController.parseContents(req, res));
+app.get(makePath('/xcontent'), (req, res) => GetContentController.parseContents(req, res));
 
 
 // DONT NEED TOKEN
