@@ -1,19 +1,18 @@
 const BaseArticleParser = require('./base-article-parser')
+const {
+    allImgSrcs
+} = require('../utils/common')
 
-class TuoiTreContentParser extends BaseArticleParser {
-    isMySite(url) {
-        return url.startsWith(`https://tuoitre.vn/`)
-    }
-
+class TuoiTreParser extends BaseArticleParser {
+    isMySite = (url) => url.startsWith(`https://tuoitre.vn/`)
     // Return NULL: Không request next content, có thể là không lấy được link tiếp theo hoặc content này là cuối cùng.
-    parseNextLink() {
-        return null;
-    }
-
+    parseNextLink = () =>  null;
     // Return Title của content. NULL nếu không parse được title.
-    parseTitle() {
-        return this.rootQuery('.detail-title').text;
-    }
+    parseTitle = () => this.rootQueryText('.detail-title');
+    parseCreatedDate = () => null
+    parseSummary = () =>  this.rootQueryText('.detail-sapo');
+    parseImages = () =>  allImgSrcs(this.html);
+    isFirstArticle = () =>  true;
 
     // Return html Content
     parseContent() {
@@ -22,21 +21,6 @@ class TuoiTreContentParser extends BaseArticleParser {
         return main.toString()
     }
 
-    parseCreatedDate() {
-        return null;
-    }
-
-    parseSummary() {
-        return null;
-    }
-
-    parseListArticleImages() {
-        return [];
-    }
-
-    isFirstArticle() {
-        return true;
-    }
 }
 
-module.exports = TuoiTreContentParser
+module.exports = TuoiTreParser

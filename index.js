@@ -64,7 +64,8 @@ app.listen(config.PORT, config.HOST, () => {
 
 
 const axios = require("axios");
-const testURL = "http://localhost:3000/xcontent?url=https://tuoitre.vn/hinh-anh-tho-nhi-ky-syria-truoc-va-sau-dong-dat-kep-20230208141729257.htm"
-console.log("Thuc hien request");
-axios.get(testURL); // Thực hiện request đến URL mong muốn
-console.log("Request thành công");
+// const testURL = "http://localhost:3000/xcontent?url=https://truyensextv.com/duc-vong-sau-tham/"
+// console.log("Thuc hien request");
+// axios.get(testURL); // Thực hiện request đến URL mong muốn
+// console.log("Request thành công");
+

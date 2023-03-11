@@ -1,6 +1,21 @@
 const moment = require('moment');
+const {
+    log,
+    warn,
+    error,
+    success
+} = require('./log')
+const axios = require('axios')
 
-const axios = require('axios');
+const {
+    curly
+} = require('node-libcurl');
+
+axios.defaults.headers.common['User-Agent'] = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/108.0.0.0 Safari/537.36';
+axios.defaults.headers.common['Accept'] = 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8';
+axios.defaults.headers.common['Connection'] = 'keep-alive';
+axios.defaults.withCredentials = true;
+axios.defaults.maxRedirects = 10;
 
 const {
     Aes256
@@ -25,7 +40,7 @@ const isUrlStartBy = (url, start) => {
     //     return false;
     // }
     console.log(`start = ${start}`)
-    return  url.startsWith(start);
+    return url.startsWith(start);
 }
 
 
@@ -52,26 +67,45 @@ async function httpGet(url) {
     }
 }
 
-
+// Download raw data (html, text)
 async function loadRaw(url) {
-    const config = {
-        headers: {
-            'Content-Type': 'application/json'
-        }
-    };
-
     try {
-        const response = await axios.request({
-            method: 'get',
-            url: url,
-            headers: config.headers
-        });
-        return response.data;
+        const {
+            statusCode,
+            data,
+            headers
+        } = await curly.get(url)
+        // console.dir(data);
+        return data;
     } catch (error) {
-        console.error(error);
+        // console.log(error);
+        return "";
+    }
+}
+
+// Find all <IMG>.src trong html
+const allImgSrcs = (html) => {
+    const regex = /<img[^>]+src="?([^"\s]+)"?\s*\/?>/i;
+    return html.match(regex);
+}
+
+const firstImgSrc = (html) => {
+    const match = allImgSrcs(html)
+
+    if (match) {
+        const firstImgSrc = match[1];
+        console.log(firstImgSrc); // Output: https://example.com/image1.jpg
+        return firstImgSrc;
+    } else {
+        console.log("Không tìm thấy thẻ img");
         return null;
     }
 }
+
+// Convert String to Hex
+const string2Hex = (str) => Buffer.from(str, "utf8").toString("hex");
+// Convert Hext to String
+const hex2String = (hex) => Buffer.from(hex, "hex").toString("utf8");
 
 module.exports = {
     date2String,
@@ -79,5 +113,9 @@ module.exports = {
     validURL,
     isUrlStartBy,
     httpGet,
-    loadRaw
+    loadRaw,
+    firstImgSrc,
+    allImgSrcs,
+    string2Hex,
+    hex2String
 }

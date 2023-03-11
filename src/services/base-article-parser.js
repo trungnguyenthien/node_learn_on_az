@@ -7,6 +7,8 @@ class ArticleParser {
         this.document = parse(html)
     }
 
+    rootQueryText = (xpath) => this.document.querySelector(xpath).text
+
     rootQuery = (xpath) => this.document.querySelector(xpath)
 
     rootQueryAll = (xpath) => this.document.querySelectorAll(xpath)
@@ -51,7 +53,7 @@ class BaseArticleParser extends ArticleParser {
         return null;
     }
 
-    parseListArticleImages() {
+    parseImages() {
         return [];
     }
 
