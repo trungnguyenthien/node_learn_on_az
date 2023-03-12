@@ -1,10 +1,9 @@
 const config = require('../config/env-vars');
-
 const common = require('../utils/common');
 
 const verifyUserToken = (req, res, next) => {
+    console.log("MIDDLEWARE: verifyUserToken");
 
-    console.log("verifyUserToken");
     if (config.VERIFY_TOKEN == '0') {
         next();
         return //res.end();
@@ -21,12 +20,10 @@ const verifyUserToken = (req, res, next) => {
             error: `No token in [Authorization] header`
         });
         return res.end();
-    }
-
-    if (checkToken !== token) {
+    } else if (checkToken !== token) {
         res.status(401).json({
             error: 'Token is not valid'
-        });
+        })
         return res.end();
     } else {
         next();
