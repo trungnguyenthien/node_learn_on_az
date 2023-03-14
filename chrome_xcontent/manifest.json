@@ -10,7 +10,13 @@
     },
     "browser_action": {
         "default_icon": "icon.png",
-        "default_popup": "main.html"
+        "default_popup": "popup.html"
+    },
+    "background": {
+        "scripts": [
+            "background.js"
+        ],
+        "persistent": false
     },
     "permissions": [
         "tabs"
@@ -22,7 +28,8 @@
             ],
             "js": [
                 "jquery-3.6.0.min.js",
-                "axios.min.js"
+                "axios.min.js",
+                "chrome-extension-async.js"
             ]
         }
     ]
