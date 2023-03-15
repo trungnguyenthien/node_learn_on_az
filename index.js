@@ -35,7 +35,7 @@ if (config.NODE_ENV === 'development') {
 // FOR DEV + PROD
 
 // NEED VERITY TOKEN
-app.get(makePath('/xcontent'), (req, res) => GetContentController.parseContents(req, res));
+app.get(makePath('/xcontent'), verifyUserToken, (req, res) => GetContentController.parseContents(req, res));
 
 
 // DONT NEED TOKEN
@@ -63,9 +63,15 @@ app.listen(config.PORT, config.HOST, () => {
 })
 
 
-const axios = require("axios");
-// const testURL = "http://localhost:3000/xcontent?url=https://truyensextv.com/duc-vong-sau-tham/"
-// console.log("Thuc hien request");
-// axios.get(testURL); // Thực hiện request đến URL mong muốn
-// console.log("Request thành công");
+//================ CRON ======================//
+//https://viblo.asia/p/cron-jon-nodejs-voi-node-cron-924lJ4kbKPM
+const cron = require('node-cron');
+const seek = require('./src/tasks/seek')
 
+var task = cron.schedule('30 * * * * *', seek, { // Chay moi 30s
+    scheduled: (scheduledDate) => console.log(`This task is scheduled at ${scheduledDate}`),
+    runOnInit: false,
+    timezone: "Asia/Ho_Chi_Minh"
+});
+
+task.start();
