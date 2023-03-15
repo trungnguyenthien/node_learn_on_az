@@ -3,6 +3,7 @@ const corsOptions = require('./src/config/cors-options');
 const express = require('express');
 const cors = require('cors');
 const verifyUserToken = require('./src/middlewares/verify-token');
+const redisSessionMiddleware = require('./src/middlewares/redis-session');
 const bodyParser = require("body-parser");
 const common = require('./src/utils/common');
 const morgan = require('morgan');
@@ -12,6 +13,7 @@ const CryptoController = require('./src/controllers/crypto');
 const GetContentController = require('./src/controllers/xcontent');
 
 const app = express();
+app.use(redisSessionMiddleware)
 app.use(cors(corsOptions));
 app.use(bodyParser.urlencoded({
     extended: false
@@ -69,7 +71,7 @@ const cron = require('node-cron');
 const seek = require('./src/tasks/seek')
 
 var task = cron.schedule('30 * * * * *', seek, { // Chay moi 30s
-    scheduled: (scheduledDate) => console.log(`This task is scheduled at ${scheduledDate}`),
+    scheduled: false,
     runOnInit: false,
     timezone: "Asia/Ho_Chi_Minh"
 });
