@@ -3,7 +3,7 @@ const corsOptions = require('./src/config/cors-options');
 const express = require('express');
 const cors = require('cors');
 const verifyUserToken = require('./src/middlewares/verify-token');
-const redisSessionMiddleware = require('./src/middlewares/redis-session');
+// const redisSessionMiddleware = require('./src/middlewares/redis-session');
 const bodyParser = require("body-parser");
 const common = require('./src/utils/common');
 const morgan = require('morgan');
@@ -13,7 +13,7 @@ const CryptoController = require('./src/controllers/crypto');
 const GetContentController = require('./src/controllers/xcontent');
 
 const app = express();
-app.use(redisSessionMiddleware)
+// app.use(redisSessionMiddleware)
 app.use(cors(corsOptions));
 app.use(bodyParser.urlencoded({
     extended: false
@@ -58,6 +58,11 @@ app.get(makePath('/info'), (req, res) => {
         }
     });
 });
+
+const RedisController = require('./src/controllers/redis')
+app.get(makePath('/redis'), RedisController.get)
+app.post(makePath('/redis'), RedisController.post)
+app.delete(makePath('/redis'), RedisController.delete)
 
 app.listen(config.PORT, config.HOST, () => {
     console.log(`APP LISTENING ON http://${config.HOST}:${config.PORT}`);
