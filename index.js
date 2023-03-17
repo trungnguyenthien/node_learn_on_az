@@ -69,7 +69,7 @@ app.listen(config.PORT, config.HOST, () => {
     console.log(config.ROOT);
 })
 
-
+/*
 //================ CRON ======================//
 //https://viblo.asia/p/cron-jon-nodejs-voi-node-cron-924lJ4kbKPM
 const cron = require('node-cron');
@@ -82,3 +82,4 @@ var task = cron.schedule('30 * * * * *', seek, { // Chay moi 30s
 });
 
 task.start();
+*/
