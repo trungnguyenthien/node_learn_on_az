@@ -9,8 +9,8 @@ const common = require('./src/utils/common');
 const morgan = require('morgan');
 const listEndpoints = require('express-list-endpoints');
 // CONTROLLER
-const CryptoController = require('./src/controllers/crypto');
-const GetContentController = require('./src/controllers/xcontent');
+// const CryptoController = require('./src/controllers/crypto');
+// const GetContentController = require('./src/controllers/xcontent');
 
 const app = express();
 // app.use(redisSessionMiddleware)
@@ -37,12 +37,12 @@ if (config.NODE_ENV === 'development') {
 // FOR DEV + PROD
 
 // NEED VERITY TOKEN
-app.get(makePath('/xcontent'), verifyUserToken, (req, res) => GetContentController.parseContents(req, res));
+// app.get(makePath('/xcontent'), verifyUserToken, (req, res) => GetContentController.parseContents(req, res));
 
 
-// DONT NEED TOKEN
-app.post(makePath('/utils/aesEncrypt'), (req, res) => CryptoController.encrypt(req, res));
-app.post(makePath('/utils/aesDecrypt'), (req, res) => CryptoController.decrypt(req, res));
+// // DONT NEED TOKEN
+// app.post(makePath('/utils/aesEncrypt'), (req, res) => CryptoController.encrypt(req, res));
+// app.post(makePath('/utils/aesDecrypt'), (req, res) => CryptoController.decrypt(req, res));
 
 const startTime = new Date();
 app.get(makePath('/info'), (req, res) => {
