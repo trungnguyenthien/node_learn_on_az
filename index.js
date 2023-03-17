@@ -58,7 +58,7 @@ app.get(makePath('/info'), (req, res) => {
         }
     });
 });
-
+/*
 const RedisController = require('./src/controllers/redis')
 app.get(makePath('/redis'), RedisController.get)
 app.post(makePath('/redis'), RedisController.post)
@@ -68,7 +68,7 @@ app.listen(config.PORT, config.HOST, () => {
     console.log(`APP LISTENING ON http://${config.HOST}:${config.PORT}`);
     console.log(config.ROOT);
 })
-
+*/
 
 //================ CRON ======================//
 //https://viblo.asia/p/cron-jon-nodejs-voi-node-cron-924lJ4kbKPM
