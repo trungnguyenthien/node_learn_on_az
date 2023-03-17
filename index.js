@@ -72,13 +72,13 @@ app.listen(config.PORT, config.HOST, () => {
 
 //================ CRON ======================//
 //https://viblo.asia/p/cron-jon-nodejs-voi-node-cron-924lJ4kbKPM
-const cron = require('node-cron');
-const seek = require('./src/tasks/seek')
+// const cron = require('node-cron');
+// const seek = require('./src/tasks/seek')
 
-var task = cron.schedule('30 * * * * *', seek, { // Chay moi 30s
-    scheduled: false,
-    runOnInit: false,
-    timezone: "Asia/Ho_Chi_Minh"
-});
+// var task = cron.schedule('30 * * * * *', seek, { // Chay moi 30s
+//     scheduled: false,
+//     runOnInit: false,
+//     timezone: "Asia/Ho_Chi_Minh"
+// });
 
-task.start();
+// task.start();
