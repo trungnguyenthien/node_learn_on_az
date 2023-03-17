@@ -2,15 +2,15 @@ const config = require('./src/config/env-vars'); // Đọc biến môi trường
 const corsOptions = require('./src/config/cors-options');
 const express = require('express');
 const cors = require('cors');
-// const verifyUserToken = require('./src/middlewares/verify-token');
-// const redisSessionMiddleware = require('./src/middlewares/redis-session');
+const verifyUserToken = require('./src/middlewares/verify-token');
+const redisSessionMiddleware = require('./src/middlewares/redis-session');
 const bodyParser = require("body-parser");
 const common = require('./src/utils/common');
-// const morgan = require('morgan');
+const morgan = require('morgan');
 const listEndpoints = require('express-list-endpoints');
 // CONTROLLER
-// const CryptoController = require('./src/controllers/crypto');
-// const GetContentController = require('./src/controllers/xcontent');
+const CryptoController = require('./src/controllers/crypto');
+const GetContentController = require('./src/controllers/xcontent');
 
 const app = express();
 // app.use(redisSessionMiddleware)
@@ -37,12 +37,12 @@ if (config.NODE_ENV === 'development') {
 // FOR DEV + PROD
 
 // NEED VERITY TOKEN
-// app.get(makePath('/xcontent'), verifyUserToken, (req, res) => GetContentController.parseContents(req, res));
+app.get(makePath('/xcontent'), verifyUserToken, (req, res) => GetContentController.parseContents(req, res));
 
 
-// // DONT NEED TOKEN
-// app.post(makePath('/utils/aesEncrypt'), (req, res) => CryptoController.encrypt(req, res));
-// app.post(makePath('/utils/aesDecrypt'), (req, res) => CryptoController.decrypt(req, res));
+// DONT NEED TOKEN
+app.post(makePath('/utils/aesEncrypt'), (req, res) => CryptoController.encrypt(req, res));
+app.post(makePath('/utils/aesDecrypt'), (req, res) => CryptoController.decrypt(req, res));
 
 const startTime = new Date();
 app.get(makePath('/info'), (req, res) => {
@@ -59,10 +59,10 @@ app.get(makePath('/info'), (req, res) => {
     });
 });
 
-// const RedisController = require('./src/controllers/redis')
-// app.get(makePath('/redis'), RedisController.get)
-// app.post(makePath('/redis'), RedisController.post)
-// app.delete(makePath('/redis'), RedisController.delete)
+const RedisController = require('./src/controllers/redis')
+app.get(makePath('/redis'), RedisController.get)
+app.post(makePath('/redis'), RedisController.post)
+app.delete(makePath('/redis'), RedisController.delete)
 
 app.listen(config.PORT, config.HOST, () => {
     console.log(`APP LISTENING ON http://${config.HOST}:${config.PORT}`);
@@ -71,14 +71,14 @@ app.listen(config.PORT, config.HOST, () => {
 
 
 //================ CRON ======================//
-//https://viblo.asia/p/cron-jon-nodejs-voi-node-cron-924lJ4kbKPM
-// const cron = require('node-cron');
-// const seek = require('./src/tasks/seek')
+// https://viblo.asia/p/cron-jon-nodejs-voi-node-cron-924lJ4kbKPM
+const cron = require('node-cron');
+const seek = require('./src/tasks/seek')
 
-// var task = cron.schedule('30 * * * * *', seek, { // Chay moi 30s
-//     scheduled: false,
-//     runOnInit: false,
-//     timezone: "Asia/Ho_Chi_Minh"
-// });
+var task = cron.schedule('30 * * * * *', seek, { // Chay moi 30s
+    scheduled: false,
+    runOnInit: false,
+    timezone: "Asia/Ho_Chi_Minh"
+});
 
-// task.start();
+task.start();

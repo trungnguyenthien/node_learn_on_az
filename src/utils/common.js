@@ -1,15 +1,5 @@
 const moment = require('moment');
-const {
-    log,
-    warn,
-    error,
-    success
-} = require('./log')
 const axios = require('axios')
-
-const {
-    curly
-} = require('node-libcurl');
 
 axios.defaults.headers.common['User-Agent'] = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/108.0.0.0 Safari/537.36';
 // axios.defaults.headers.common['Accept'] = 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8';
@@ -70,15 +60,11 @@ async function httpGet(url) {
 // Download raw data (html, text)
 async function loadRaw(url) {
     try {
-        const {
-            statusCode,
-            data,
-            headers
-        } = await curly.get(url)
-        // console.dir(data);
-        return data;
+        const html = await axios.get(url)
+        // console.dir(html);
+        return html.data;
     } catch (error) {
-        // console.log(error);
+        // console.log(`loadRaw = ${error}`);
         return "";
     }
 }

@@ -3,10 +3,10 @@ const session = require('express-session');
 const RedisStore = require('connect-redis').default;
 
 // Tạo Redis client
-const redis = require('../utils/redis-client')
+const redisClient = require('../utils/redis-client')
 // Kết nối Redis store với session
 const sessionStore = new RedisStore({
-    client: redis.client
+    client: redisClient
 });
 
 const redisSessionMiddleware = session({

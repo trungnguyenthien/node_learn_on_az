@@ -8,6 +8,7 @@ const GetContentController = {
         const url = req.query.url
         const isDownload = (req.query.file || 0) == 1
         const output = await parse(url)
+        console.log(`output = ${output}`)
 
         console.log(output.map((m) => m.id))
 
