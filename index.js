@@ -2,11 +2,11 @@ const config = require('./src/config/env-vars'); // Đọc biến môi trường
 const corsOptions = require('./src/config/cors-options');
 const express = require('express');
 const cors = require('cors');
-const verifyUserToken = require('./src/middlewares/verify-token');
+// const verifyUserToken = require('./src/middlewares/verify-token');
 // const redisSessionMiddleware = require('./src/middlewares/redis-session');
 const bodyParser = require("body-parser");
 const common = require('./src/utils/common');
-const morgan = require('morgan');
+// const morgan = require('morgan');
 const listEndpoints = require('express-list-endpoints');
 // CONTROLLER
 // const CryptoController = require('./src/controllers/crypto');
@@ -19,7 +19,7 @@ app.use(bodyParser.urlencoded({
     extended: false
 }));
 app.use(bodyParser.json());
-app.use(morgan('combined')); // sử dụng morgan để ghi log cho tất cả các yêu cầu vào và ra
+// app.use(morgan('combined')); // sử dụng morgan để ghi log cho tất cả các yêu cầu vào và ra
 
 const makePath = (path) => `${config.ROOT}${path}`;
 
