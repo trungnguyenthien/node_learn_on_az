@@ -59,10 +59,10 @@ app.get(makePath('/info'), (req, res) => {
     });
 });
 
-const RedisController = require('./src/controllers/redis')
-app.get(makePath('/redis'), RedisController.get)
-app.post(makePath('/redis'), RedisController.post)
-app.delete(makePath('/redis'), RedisController.delete)
+// const RedisController = require('./src/controllers/redis')
+// app.get(makePath('/redis'), RedisController.get)
+// app.post(makePath('/redis'), RedisController.post)
+// app.delete(makePath('/redis'), RedisController.delete)
 
 app.listen(config.PORT, config.HOST, () => {
     console.log(`APP LISTENING ON http://${config.HOST}:${config.PORT}`);
