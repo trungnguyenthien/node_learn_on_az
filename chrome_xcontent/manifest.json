@@ -21,19 +21,6 @@
     "permissions": [
         "tabs", "webNavigation"
     ],
-    // "content_scripts": [
-    //     {
-    //         "matches": [
-    //             "http://*/*"
-    //         ],
-    //         "js": [
-    //             "libs/jquery-3.6.0.min.js",
-    //             "libs/axios.min.js",
-    //             "libs/chrome-extension-async.js"
-    //         ]
-    //     }
-    // ],
     "options_page": "options.html",
     "content_security_policy": "script-src 'self' https://cdn.jsdelivr.net https://cdnjs.cloudflare.com; object-src 'self'"
-
 }
