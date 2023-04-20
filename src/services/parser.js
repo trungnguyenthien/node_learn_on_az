@@ -41,7 +41,7 @@ const parse = async (url) => {
         const summary = myParser.parseSummary()
         const images = myParser.parseImages()
 
-        console.log(content)
+        // console.log(content)
 
         output.push({
             id: md5(myURL),
@@ -54,7 +54,7 @@ const parse = async (url) => {
         })
         chapNum += 1
         myURL = nextLink
-        await sleep(100)
+        await sleep(50)
     }
 
     return output
