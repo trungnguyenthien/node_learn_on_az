@@ -27,13 +27,24 @@ class TruyenSexTvParser extends BaseArticleParser {
 
     // Return html Content
     parseContent() {
-        let main = this.rootQuery('div.ndtruyen');
+        let main = this.rootQuery('.ndtruyen')
+        if(!main) {
+            const logo2 = this.rootQuery('.logo2')
+
+            this.removeAds(logo2, '.noibat')
+            this.removeAds(logo2, '.bai-viet-box')
+            this.removeAds(logo2, '.phdr')
+            this.removeAds(logo2, '.phantrang')
+            this.removeAds(logo2, '.dulieu')
+            
+            main = logo2
+        }
         // this.removeAds(main, 'div.VCSortableInPreviewMode[type=RelatedOneNews]')
         try {
             return main.text
         } catch (err) {
             console.log(main)
-            // console.log(this.html)
+            console.log(this.document)
         }
 
     }

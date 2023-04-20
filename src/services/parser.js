@@ -42,6 +42,9 @@ const parse = async (url) => {
         const images = myParser.parseImages()
 
         // console.log(content)
+        if(!content) {
+            break
+        }
 
         output.push({
             id: md5(myURL),
