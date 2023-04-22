@@ -27,28 +27,15 @@ class TruyenSexTvParser extends BaseArticleParser {
 
     // Return html Content
     parseContent() {
-        let main = this.rootQuery('.ndtruyen')
-        if(!main) {
-            const logo2 = this.rootQuery('.logo2')
-
-            this.removeAds(logo2, '.noibat')
-            this.removeAds(logo2, '.bai-viet-box')
-            this.removeAds(logo2, '.phdr')
-            this.removeAds(logo2, '.phantrang')
-            this.removeAds(logo2, '.dulieu')
-            
-            main = logo2
-        }
-        // this.removeAds(main, 'div.VCSortableInPreviewMode[type=RelatedOneNews]')
-        try {
-            return main.text
-        } catch (err) {
-            console.log(main)
-            console.log(this.document)
-        }
+        var str = this.html
+        var textStart = '<div class="ndtruyen">';
+        var textEnd = '</div>';
+        var startPos = str.indexOf(textStart) + textStart.length;
+        var endPos = str.indexOf(textEnd, startPos);
+        var result = str.substring(startPos, endPos);
+        return result;
 
     }
-
 }
 
 module.exports = TruyenSexTvParser

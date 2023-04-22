@@ -26,6 +26,8 @@ class ArticleParser {
 
 class BaseArticleParser extends ArticleParser {
 
+
+
     isMySite(url) {
         return false; //url.startsWith(`https://tuoitre.vn/`)
     }
