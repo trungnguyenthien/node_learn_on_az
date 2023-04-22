@@ -1,6 +1,6 @@
 const BaseArticleParser = require('./base-article-parser')
 const {
-    allImgSrcs
+    parseSubString
 } = require('../utils/common')
 
 class TruyenSexTvParser extends BaseArticleParser {
@@ -27,14 +27,7 @@ class TruyenSexTvParser extends BaseArticleParser {
 
     // Return html Content
     parseContent() {
-        var str = this.html
-        var textStart = '<div class="ndtruyen">';
-        var textEnd = '</div>';
-        var startPos = str.indexOf(textStart) + textStart.length;
-        var endPos = str.indexOf(textEnd, startPos);
-        var result = str.substring(startPos, endPos);
-        return result;
-
+        return parseSubString(this.html, '<div class="ndtruyen">', '</div>')
     }
 }
 

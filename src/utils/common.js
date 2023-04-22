@@ -88,6 +88,16 @@ const firstImgSrc = (html) => {
     }
 }
 
+const parseSubString = (str, textStart, textEnd) => {
+    // var str = this.html
+    // var textStart = '<div class="ndtruyen">';
+    // var textEnd = '</div>';
+    var startPos = str.indexOf(textStart) + textStart.length;
+    var endPos = str.indexOf(textEnd, startPos);
+    var result = str.substring(startPos, endPos);
+    return result;
+}
+
 // Convert String to Hex
 const string2Hex = (str) => Buffer.from(str, "utf8").toString("hex");
 // Convert Hext to String
@@ -103,5 +113,6 @@ module.exports = {
     firstImgSrc,
     allImgSrcs,
     string2Hex,
-    hex2String
+    hex2String,
+    parseSubString
 }
