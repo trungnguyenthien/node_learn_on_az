@@ -42,6 +42,14 @@
                 "libs/bootstrap.bundle.min.js"
             ],
             "matches": []
+        },
+        {
+            "resources": [
+                "images/loading.gif",
+                "images/success.git",
+                "images/error.gif"
+            ],
+            "matches": []
         }
     ]
 }

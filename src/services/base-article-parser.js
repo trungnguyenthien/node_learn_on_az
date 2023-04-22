@@ -21,6 +21,11 @@ class ArticleParser {
             adDiv.remove()
         }
     }
+
+    textOf(html2) {
+        const document2 = parse(html2)
+        return document2.text
+    }
 }
 
 
