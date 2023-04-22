@@ -28,7 +28,8 @@ class TruyenSexTvParser extends BaseArticleParser {
     // Return html Content
     parseContent() {
         var html2 = parseSubString(this.html, '<div class="ndtruyen">', '</div>')
-        return this.textOf(`<html><body>${html2}</body></html>`)
+        // return this.textOf(`<html><body>${html2}</body></html>`)
+        return html2
     }
 }
 
