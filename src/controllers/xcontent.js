@@ -10,6 +10,11 @@ const GetContentController = {
         const output = await parse(url)
         console.log(`output = ${output}`)
 
+        if(output.error) {
+            res.status(404).json({ error: 'Không tìm thấy trang' });
+            return res.end();
+        }
+
         console.log(output.map((m) => m.id))
 
         if (isDownload && output.length > 0) {

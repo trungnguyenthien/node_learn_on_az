@@ -1,5 +1,6 @@
 const TuoiTreParser = require('./tuoitre-parser')
 const TruyenSexTvParser = require('./truyensextv-parser')
+const TruyenKkzParser = require('./truyenkkz-parser')
 const { log, warn, error, success } = require('../utils/log')
 const common = require('../utils/common')
 const { md5 } = require('../utils/crypto-utils')
@@ -10,6 +11,7 @@ function sleep(ms) {
 const makeAllContentParser = () => [
     new TuoiTreParser(),
     new TruyenSexTvParser(),
+    new TruyenKkzParser(),
 ]
 
 const parse = async (url) => {
