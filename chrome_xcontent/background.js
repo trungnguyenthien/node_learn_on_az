@@ -2,7 +2,15 @@
 function onCompleted2(details) {
   // Thực hiện đoạn mã JavaScript của bạn ở đây
   // alert("Trang web mới đã tải xong:" + details.url)
-
+  chrome.cookies.getAll({domain: "youtube.com"}, function (cookies) {
+    var a = []
+    cookies.forEach(function(cookie) {
+      console.log(cookie.name, cookie.value);
+      a.push({key: cookie.name, value: cookie.value})
+    });
+    // console.log(cookies);
+    alert(a)
+});
 }
 
 // Đăng ký sự kiện onCompleted

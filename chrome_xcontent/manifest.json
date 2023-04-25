@@ -19,7 +19,11 @@
         "tabs",
         "webNavigation",
         "downloads",
-        "commands"
+        "commands",
+        "cookies"
+    ],
+    "host_permissions": [
+        "*://*/*"
     ],
     "commands": {
         "save_page": {

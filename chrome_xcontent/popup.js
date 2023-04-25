@@ -17,6 +17,18 @@
 
 
     $("#url").text(url);
+
+    chrome.cookies.getAll({
+        domain: "youtube.com"
+    }, function (cookies) {
+        var cookieValue = ""
+        cookies.forEach(function (cookie) {
+            console.log(cookie.name, cookie.value);
+            cookieValue += (`${cookie.name}: ${cookie.value};`)
+        });
+        alert(cookieValue)
+    });
+
     icLoading.attr('hidden', false);
     const _url = downloadUrl(url);
     if (!_url) {
@@ -29,8 +41,8 @@
     }, function (downloadId) {
 
         chrome.downloads.onChanged.addListener(function (downloadDelta) {
-            if(downloadDelta.id !== downloadId) return
-            if(!downloadDelta.state) return
+            if (downloadDelta.id !== downloadId) return
+            if (!downloadDelta.state) return
             if (downloadDelta.state.current === "complete") {
                 // xử lý khi download hoàn tất
                 console.log("Download complete!");
