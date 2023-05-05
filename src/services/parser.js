@@ -1,6 +1,6 @@
 const TuoiTreParser = require('./tuoitre-parser')
 const TruyenSexTvParser = require('./truyensextv-parser')
-const TruyenKkzParser = require('./truyenkkz-parser')
+const SayHentaiMeParser = require('./Sayhentaime-parser')
 const { log, warn, error, success } = require('../utils/log')
 const common = require('../utils/common')
 const { md5 } = require('../utils/crypto-utils')
@@ -11,7 +11,7 @@ function sleep(ms) {
 const makeAllContentParser = () => [
     new TuoiTreParser(),
     new TruyenSexTvParser(),
-    new TruyenKkzParser(),
+    new SayHentaiMeParser()
 ]
 
 const parse = async (url) => {
@@ -28,6 +28,7 @@ const parse = async (url) => {
     let output = [];
     let chapNum = 0;
     let myURL = url;
+    let currentLink = ""
     while (myURL) {
         const html = await common.loadRaw(myURL)
         console.log("Load completed " + myURL)
@@ -39,9 +40,10 @@ const parse = async (url) => {
         myParser.init(myURL, html)
         const content = myParser.parseContent()
         const title = myParser.parseTitle()
-        const nextLink = myParser.parseNextLink()
+        const nextLink = myParser.parseNextLink(currentLink)
         const summary = myParser.parseSummary()
         const images = myParser.parseImages()
+        currentLink = nextLink
 
         // console.log(content)
         if(!content) {

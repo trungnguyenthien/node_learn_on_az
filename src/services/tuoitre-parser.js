@@ -6,7 +6,7 @@ const {
 class TuoiTreParser extends BaseArticleParser {
     isMySite = (url) => url.startsWith(`https://tuoitre.vn/`)
     // Return NULL: Không request next content, có thể là không lấy được link tiếp theo hoặc content này là cuối cùng.
-    parseNextLink = () =>  null;
+    parseNextLink = (currentLink) =>  null;
     // Return Title của content. NULL nếu không parse được title.
     parseTitle = () => this.rootQueryText('.detail-title');
     parseCreatedDate = () => null

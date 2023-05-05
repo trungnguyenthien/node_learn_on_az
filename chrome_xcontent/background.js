@@ -2,15 +2,20 @@
 function onCompleted2(details) {
   // Thực hiện đoạn mã JavaScript của bạn ở đây
   // alert("Trang web mới đã tải xong:" + details.url)
-  chrome.cookies.getAll({domain: "youtube.com"}, function (cookies) {
+  chrome.cookies.getAll({
+    domain: "youtube.com"
+  }, function (cookies) {
     var a = []
-    cookies.forEach(function(cookie) {
+    cookies.forEach(function (cookie) {
       console.log(cookie.name, cookie.value);
-      a.push({key: cookie.name, value: cookie.value})
+      a.push({
+        key: cookie.name,
+        value: cookie.value
+      })
     });
     // console.log(cookies);
     alert(a)
-});
+  });
 }
 
 // Đăng ký sự kiện onCompleted
@@ -20,7 +25,7 @@ chrome.webNavigation.onCompleted.addListener(onCompleted2, {
   }]
 });
 
-chrome.commands.onCommand.addListener(async function(command) {
+chrome.commands.onCommand.addListener(async function (command) {
   if (command === "save_page") {
     const tabs = await chrome.tabs.query({
       active: true,
@@ -50,8 +55,8 @@ chrome.commands.onCommand.addListener(async function(command) {
 
 const api = 'http://localhost:3000/xcontent?file=1&url='
 const downloadUrl = (url) => {
-    if (!url.startsWith('https://truyensextv.me/')) {
-        return null;
-    }
-    return api + url
+  if (!url.startsWith('https://truyensextv.me/')) {
+    return null;
+  }
+  return api + url
 }

@@ -15,19 +15,7 @@
     })
     let url = tabs[0].url;
 
-
     $("#url").text(url);
-
-    chrome.cookies.getAll({
-        domain: "youtube.com"
-    }, function (cookies) {
-        var cookieValue = ""
-        cookies.forEach(function (cookie) {
-            console.log(cookie.name, cookie.value);
-            cookieValue += (`${cookie.name}: ${cookie.value};`)
-        });
-        alert(cookieValue)
-    });
 
     icLoading.attr('hidden', false);
     const _url = downloadUrl(url);

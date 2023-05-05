@@ -98,10 +98,29 @@ const parseSubString = (str, textStart, textEnd) => {
     return result;
 }
 
+const arrayGetFromLast = (array, bIndex) => {
+    let len = array.length
+    let index = len - 1 - bIndex
+    if (index >= 0 && index < len) {
+        return array[index]
+    }
+    return null;
+}
+
 // Convert String to Hex
 const string2Hex = (str) => Buffer.from(str, "utf8").toString("hex");
 // Convert Hext to String
 const hex2String = (hex) => Buffer.from(hex, "hex").toString("utf8");
+
+const splitStrFromLast = (str, splitChar) => {
+    if(!str) return null;
+    const lastDashIndex = str.lastIndexOf(splitChar);
+    if(lastDashIndex.length < 2) return null;
+
+    const part1 = str.substring(0, lastDashIndex);
+    const part2 = str.substring(lastDashIndex + 1);
+    return [part1, part2]
+}
 
 module.exports = {
     date2String,
@@ -114,5 +133,7 @@ module.exports = {
     allImgSrcs,
     string2Hex,
     hex2String,
-    parseSubString
+    parseSubString,
+    arrayGetFromLast,
+    splitStrFromLast
 }
