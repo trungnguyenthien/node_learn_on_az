@@ -6,7 +6,7 @@ const {
 class TruyenSexTvParser extends BaseArticleParser {
     isMySite = (url) => url.startsWith(`https://truyensextv.me/`) || url.startsWith(`https://truyennung.com/`)
     // Return NULL: Không request next content, có thể là không lấy được link tiếp theo hoặc content này là cuối cùng.
-    parseNextLink = () => {
+    parseNextLink = (currentLink) => {
         const phantrang = this.rootQuery('div.phantrang')
         if (!phantrang) return null
         const links = phantrang.querySelectorAll('a.post-page-numbers')

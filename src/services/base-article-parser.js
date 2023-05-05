@@ -38,7 +38,7 @@ class BaseArticleParser extends ArticleParser {
     }
 
     // Return NULL: Không request next content, có thể là không lấy được link tiếp theo hoặc content này là cuối cùng.
-    parseNextLink() {
+    parseNextLink(currentLink) {
         return null;
     }
 
