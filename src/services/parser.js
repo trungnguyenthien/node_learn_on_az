@@ -1,6 +1,7 @@
 const TuoiTreParser = require('./tuoitre-parser')
 const TruyenSexTvParser = require('./truyensextv-parser')
 const SayHentaiMeParser = require('./Sayhentaime-parser')
+const HentaiV1Parser = require('./hentaiv1-parser')
 const { log, warn, error, success } = require('../utils/log')
 const common = require('../utils/common')
 const { md5 } = require('../utils/crypto-utils')
@@ -11,7 +12,8 @@ function sleep(ms) {
 const makeAllContentParser = () => [
     new TuoiTreParser(),
     new TruyenSexTvParser(),
-    new SayHentaiMeParser()
+    new SayHentaiMeParser(),
+    new HentaiV1Parser()
 ]
 
 const parse = async (url) => {
